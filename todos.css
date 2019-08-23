@@ -29,7 +29,7 @@ body {
 }
 
 .todo-list__item {
-  background: #fff;
+  background: #48dafb79;
   color: #666;
   display: flex;
   align-items: center;
@@ -37,7 +37,7 @@ body {
 }
 
 .todo-list__item:nth-child(even) {
-  background: #f7f7f7;
+  background: #0abbe379;
 }
 
 .todo-list__item span {
