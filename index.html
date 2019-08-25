@@ -13,21 +13,24 @@
   </head>
   <body>
     <div class="todo">
-      <h1 class="todo-heading">
-        To-Do List
-      </h1>
-      <input class="todo-input" type="text" placeholder="Add New Todo" />
+      <div class="top">
+        <h1 class="todo-heading">
+          To-Do List
+        </h1>
+        <div class="top-buttons">
+          <button class="save">Save List</button>
+          <button class="clear">Clear List</button>
+        </div>
+      </div>
 
-      <ul class="todo-list">
-        <li class="todo-list__item">
-          Task 1 <span><i class="fa fa-trash"></i></span>
-        </li>
-        <li class="todo-list__item">
-          Task 2 <span><i class="fa fa-trash"></i></span>
-        </li>
-      </ul>
+      <input
+        class="todo-input"
+        type="text"
+        placeholder="Add New Todo &#8592;"
+      />
+      <ul class="todo-list"></ul>
     </div>
 
-    <script type="text/javascript" src="todos.js"></script>
+    <script src="todos.js"></script>
   </body>
 </html>

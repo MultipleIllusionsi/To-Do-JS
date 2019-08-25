@@ -1,53 +1,83 @@
-let All_li = document.querySelectorAll(".todo-list__item");
-let All_span = document.querySelectorAll("span");
+(function() {
+  function onPageLoaded() {
+    const saveButton = document.querySelector("button.save");
+    const clearButton = document.querySelector("button.clear");
+    const ul = document.querySelector("ul");
+    const input = document.querySelector("input");
 
-const ul = document.querySelector("ul");
-const input = document.querySelector("input");
+    ////////////////////////////////
+    function loadTodos() {
+      const data = localStorage.getItem("todos");
+      if (data) {
+        ul.innerHTML = data;
+      }
+      const deleteButtons = document.querySelectorAll("span");
+      for (const button of deleteButtons) {
+        DeleteTodo(button);
+      }
+    }
 
-// 1. input size validation
-// 2. remove animation
-// 3. separate list for completed tasks
-// 4. opportunity to change text of the task
-// 5. sync w/ localStorage
+    //////////////////////////////
+    function createToDo() {
+      const li = document.createElement("li");
+      const spanElement = document.createElement("span");
+      const icon = document.createElement("i");
 
-for (li of All_li) {
-  li.addEventListener("click", function() {
-    this.classList.toggle("completed");
-  });
-}
+      li.classList.add("todo-list__item");
+      icon.classList.add("fa", "fa-trash");
 
-for (span of All_span) {
-  span.addEventListener("click", function(e) {
-    this.parentNode.remove();
-    e.stopPropagation();
-  });
-}
+      if (input.value.length < 35) {
+        var todoText = input.value;
+        input.value = "";
+        spanElement.append(icon);
+        ul.appendChild(li).append(todoText, spanElement);
+        DeleteTodo(spanElement);
+      } else {
+        alert("Задание должно содержать меньше 35 символов!");
+        input.value = "";
+      }
+    }
 
-input.addEventListener("keypress", function(event) {
-  if (event.keyCode === 13) {
-    let todoText = this.value;
-    this.value = "";
-    ul.insertAdjacentHTML(
-      "afterbegin",
-      `<li class="todo-list__item">${todoText}<span><i class='fa fa-trash'></i></span></li>`
-    );
+    /////////////////////////////////
+    function DeleteTodo(element) {
+      element.addEventListener("click", event => {
+        element.parentElement.remove();
+        event.stopPropagation();
+      });
+    }
 
-    ul.firstChild.addEventListener("click", function() {
-      this.classList.toggle("completed");
-    });
+    //////////////////////////////////
+    function onClickTodo(evt) {
+      if (evt.target.tagName === "LI") {
+        evt.target.classList.toggle("completed");
+      }
+    }
 
-    ul.firstChild.lastChild.addEventListener("click", function(e) {
-      this.parentNode.remove();
-      e.stopPropagation();
-    });
+    ///////////////////////////////////
+    function InterfaceEvtListener() {
+      ul.addEventListener("click", onClickTodo);
+
+      saveButton.addEventListener("click", () => {
+        localStorage.setItem("todos", ul.innerHTML);
+      });
+
+      clearButton.addEventListener("click", () => {
+        ul.innerHTML = "";
+        localStorage.removeItem("todos", ul.innerHTML);
+      });
+
+      input.addEventListener("keypress", function(event) {
+        if (event.keyCode === 13) {
+          createToDo();
+        }
+      });
+    }
+
+    loadTodos();
+    InterfaceEvtListener();
   }
-});
+  document.addEventListener("DOMContentLoaded", onPageLoaded);
+})();
 
-////////////////// way to remove elem w/ animation
-// var elem = this.parentNode.style;
-//     elem.opacity = 1;
-//     (function fade() {
-//       (elem.opacity -= 0.1) < 0
-//         ? (elem.display = "none")
-//         : setTimeout(fade, 40);
-//     })();
+//////////////////////////////// features
+// 1. opportunity to change text of the task
