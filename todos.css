@@ -26,7 +26,7 @@ body {
   font-weight: normal;
 }
 
-button {
+.top-buttons > * {
   height: 100%;
   margin: 5px;
   background: #48dafb;
@@ -39,7 +39,7 @@ button {
   padding: 10px;
 }
 
-button:hover {
+.top-buttons > *:hover {
   animation: jumping 1s infinite;
 }
 
@@ -113,14 +113,22 @@ button:hover {
 }
 
 .content button {
+  display: block;
+  background: linear-gradient(to bottom right, #e98f84, #c91603);
+  margin-top: 20px;
+  border: none;
   display: inline-block;
-  background: #e74c3c;
-  margin-top: 40px;
-  margin-bottom: 0;
   padding: 10px 30px;
   border-radius: 8px;
   color: white;
   text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.content button:hover {
+  transform: scale(1.1);
 }
 
 .hideBtn {

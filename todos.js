@@ -6,7 +6,8 @@
     const input = document.querySelector("input");
     const modal = document.querySelector(".modal");
     const modalHideBtn = document.querySelector(".hideBtn");
-    const modalConfirmBtn = document.querySelector(".modal-btn");
+    const modalSaveBtn = document.querySelector(".btn-save");
+    const modalClearBtn = document.querySelector(".btn-clear");
     const modalHeading = document.querySelector(".modal-heading");
     ////////////////////////////////
     function loadTodos() {
@@ -58,27 +59,23 @@
       }
     }
     //////////////////////////////////
-    function showPopUp(calledBy) {
-      //refactor later on
+    function saveList() {
       modal.classList.add("modal-active");
-      if (calledBy.classList.contains("save")) {
-        modalHeading.textContent = "Save this list?";
-        //refactor later on
-        modalConfirmBtn.addEventListener("click", () => {
-          localStorage.setItem("todos", ul.innerHTML);
-          hidePopUp();
-        });
-      } else if (calledBy.classList.contains("clear")) {
-        modalHeading.textContent = "Delete this list?";
-        //refactor later on
-        modalConfirmBtn.addEventListener("click", () => {
-          ul.innerHTML = "";
-          localStorage.removeItem("todos", ul.innerHTML);
-          hidePopUp();
-        });
-      }
+
+      modalClearBtn.style.display = "none";
+      modalSaveBtn.style.display = "inline-block";
+
+      modalHeading.textContent = "Save this list?";
     }
 
+    function clearList() {
+      modal.classList.add("modal-active");
+
+      modalSaveBtn.style.display = "none";
+      modalClearBtn.style.display = "inline-block";
+
+      modalHeading.textContent = "Delete this list?";
+    }
     //////////////////////////////////
     function hidePopUp() {
       modal.classList.remove("modal-active");
@@ -93,11 +90,22 @@
       });
 
       saveButton.addEventListener("click", function() {
-        showPopUp(this); //refactor later on
+        saveList();
       });
 
       clearButton.addEventListener("click", function() {
-        showPopUp(this); //refactor later on
+        clearList();
+      });
+
+      modalClearBtn.addEventListener("click", () => {
+        ul.innerHTML = "";
+        localStorage.removeItem("todos", ul.innerHTML);
+        hidePopUp();
+      });
+
+      modalSaveBtn.addEventListener("click", () => {
+        localStorage.setItem("todos", ul.innerHTML);
+        hidePopUp();
       });
 
       input.addEventListener("keypress", function(event) {
