@@ -10,7 +10,7 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
 }
 
-.top {
+.todo-header {
   display: flex;
   justify-content: space-between;
   background: #2980b9;
@@ -26,7 +26,7 @@ body {
   font-weight: normal;
 }
 
-.top-buttons > * {
+.todo-buttons > * {
   height: 100%;
   margin: 5px;
   background: #48dafb;
@@ -39,7 +39,7 @@ body {
   padding: 10px;
 }
 
-.top-buttons > *:hover {
+.todo-buttons > *:hover {
   animation: jumping 1s infinite;
 }
 
@@ -96,7 +96,7 @@ body {
   position: fixed;
 }
 
-.modal .content {
+.modal .modal-content {
   text-align: center;
   background-color: #34495e;
   border-radius: 7px;
@@ -108,11 +108,11 @@ body {
   position: relative;
 }
 
-.content h1 {
+.modal-content h1 {
   font-size: 25px;
 }
 
-.content button {
+.modal-content button {
   display: block;
   background: linear-gradient(to bottom right, #e98f84, #c91603);
   margin-top: 20px;
@@ -127,7 +127,7 @@ body {
   transition: all 0.3s;
 }
 
-.content button:hover {
+.modal-content button:hover {
   transform: scale(1.1);
 }
 
